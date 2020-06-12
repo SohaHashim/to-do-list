@@ -8,43 +8,13 @@
                 response.forEach(element => {
                     completed = `${element.completed}`
                     if(completed === "false"){
-                        output += `<br><input type = "checkbox" class="tocheck"> ${element.title}`;
+                        output += `<br><input type = "checkbox" class="checkbox"> ${element.title}`;
                     }else {
-                        output += `<br><input type = "checkbox" class="tocheck" checked disabled> ${element.title}`;
+                        output += `<br><input type = "checkbox" class="checkbox" checked disabled> ${element.title}`;
                     }   
                 });        
             document.getElementById("list").innerHTML = output; 
-        //    var promise = new Promise(function(resolve,reject){
-        //         $(document).ready(function() {
-        //            // $("input[type=checkbox]").each(function(){
-        //        $('.tocheck').on('change',function(){
-        //             var count = 0;                   
-        //             if(this.checked){ 
-        //                 //alert("jdfvb");
-        //                 console.log(count);                                              
-        //                 count++;
-        //                 if(count == 5){
-                            
-        //                     // console.log(count);
-        //                     // alert("5 tasks done");
-        //                     resolve("success");
-                            
-        //                 }else{
-        //                     count--;
-        //                     //alert("not 5");}
-        //                 }
-        //             }
-        //     });
-        //     });
-        // });
-        //     promise
-        //     .then(function(s){alert(s);})  
-        
-        }
-        
-    };               
-    xhr.open("GET","https://jsonplaceholder.typicode.com/todos",true);
-    xhr.send();
+            $(document).ready(function() {    
      let count =0;
      function check(cnt){
          return new Promise(function(resolve,reject){
@@ -57,15 +27,18 @@
 
      }  
      $(document).on('change','.checkbox',function(){
-        if(this.checked){
+        if($(this).prop('checked')===true){
             count++;
-        if($(this).checked==false){
+        }else{      
             count--;
         }
-        }
-        let promise = check (count);
+        let promise = check(count);
         promise
         .then(function(){alert("5 tasks completed");})
-        .catch(function(){console.log("checked");})
+        .catch(function(){console.log("error");})
      })
-    
+    });
+}
+    }
+     xhr.open("GET","https://jsonplaceholder.typicode.com/todos",true);
+     xhr.send();
